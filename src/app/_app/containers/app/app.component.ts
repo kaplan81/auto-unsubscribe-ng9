@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   mobileQuery$: Observable<BreakpointState> = this.breakpointObserver.observe(
     AppComponent.mdMaxQuery,
   );
-  title = 'Auto Unsubscribe Angular 8';
+  title = 'Auto Unsubscribe Angular 9 Ivy';
 
   constructor(
     private breakpointObserver: BreakpointObserver,
