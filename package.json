@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "npm run serve",
+    "serve": "ng serve",
+    "serve:aot": "ng serve --aot",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
