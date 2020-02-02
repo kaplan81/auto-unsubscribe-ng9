@@ -19,6 +19,7 @@ const routes: Routes = [
     path: 'decorator',
     loadChildren: () => import('../decorator/decorator.module').then(m => m.DecoratorModule),
   },
+  { path: 'hoc', loadChildren: () => import('../hoc/hoc.module').then(m => m.HocModule) },
   {
     path: '**',
     redirectTo: 'boilerplate',
