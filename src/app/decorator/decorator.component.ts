@@ -5,7 +5,6 @@ import { ondestroy } from '../_app/decorators/ondestroy.decorator';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./decorator.component.scss'],
   templateUrl: './decorator.component.html',
 })
 export class DecoratorComponent implements OnInit, OnDestroy {

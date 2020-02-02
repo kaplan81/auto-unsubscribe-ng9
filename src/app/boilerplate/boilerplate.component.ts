@@ -4,7 +4,6 @@ import { takeUntil, tap } from 'rxjs/operators';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./boilerplate.component.scss'],
   templateUrl: './boilerplate.component.html',
 })
 export class BoilerplateComponent implements OnInit, OnDestroy {

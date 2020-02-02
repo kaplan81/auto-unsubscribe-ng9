@@ -5,7 +5,6 @@ import { SubscribedContainer } from '../_app/abstracts/subscribed-container.abst
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./abstract.component.scss'],
   templateUrl: './abstract.component.html',
 })
 export class AbstractComponent extends SubscribedContainer implements OnInit {

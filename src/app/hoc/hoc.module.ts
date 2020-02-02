@@ -1,15 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
+import { SharedModule } from '../_shared/shared.module';
 import { HocRoutingModule } from './hoc-routing.module';
 import { HocComponent } from './hoc.component';
 
-
 @NgModule({
   declarations: [HocComponent],
-  imports: [
-    CommonModule,
-    HocRoutingModule
-  ]
+  imports: [HocRoutingModule, SharedModule],
 })
-export class HocModule { }
+export class HocModule {}
