@@ -30,7 +30,7 @@ export function ondestroy(): MethodDecorator {
       /**
        * Normally you would pass the method arguments to the function:
        * ```ts
-       * original.apply(this, arguments);
+       * originalDescriptor.apply(this, arguments);
        * ```
        * But ngOnDestroy() does not take any arguments.
        */
