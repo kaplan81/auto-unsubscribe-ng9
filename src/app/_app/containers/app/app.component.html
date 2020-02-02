@@ -1,0 +1,29 @@
+<div id="layout" [class.is-mobile]="(mobileQuery$ | async).matches">
+  <mat-toolbar color="primary">
+    <h1>
+      <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+      <a routerLink="/home">{{ title }}</a>
+    </h1>
+  </mat-toolbar>
+
+  <mat-sidenav-container>
+    <mat-sidenav
+      #snav
+      [mode]="(mobileQuery$ | async).matches ? 'over' : 'side'"
+      [opened]="!(mobileQuery$ | async).matches"
+    >
+      <mat-nav-list>
+        <a mat-list-item routerLink="/boilerplate">BOILERPLATE</a>
+        <a mat-list-item routerLink="/abstract">ABSTRACT</a>
+        <a mat-list-item routerLink="/mixin">MIXIN</a>
+        <a mat-list-item routerLink="/decorator">DECORATOR</a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

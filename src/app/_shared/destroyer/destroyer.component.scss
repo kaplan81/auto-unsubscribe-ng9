@@ -1,0 +1,15 @@
+:host {
+  padding: 0 30px;
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .destroyer__img {
+    max-width: 250px;
+  }
+  .destroyer__btn {
+    min-height: 100px;
+    min-width: 200px;
+    font-size: 1.2rem;
+  }
+}

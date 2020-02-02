@@ -1,0 +1,36 @@
+#layout {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  mat-toolbar {
+    position: fixed;
+    height: 64px;
+    z-index: 2;
+    h1 {
+      display: flex;
+      a {
+        color: white;
+        text-decoration: none;
+        padding: 5px 20px;
+      }
+    }
+  }
+  mat-sidenav-container {
+    margin-top: 64px;
+    flex: 1;
+    &.is-mobile {
+      flex: 1 0 auto;
+    }
+    mat-sidenav {
+      min-width: 180px;
+      color: #444;
+    }
+    main {
+      padding: 25px;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+:host {
+  padding: 500px;
+  text-align: center;
+  color: #673ab7;
+  .mat-dialog-title {
+    font-size: 1.7rem;
+    text-shadow: 1px 1px #f44336;
+  }
+  .mat-dialog-content {
+    font-size: 1.2rem;
+  }
+  .mat-dialog-actions {
+    display: flex;
+    justify-content: center;
+    .mat-raised-button {
+      min-width: 150px;
+      min-height: 50px;
+    }
+  }
+}
