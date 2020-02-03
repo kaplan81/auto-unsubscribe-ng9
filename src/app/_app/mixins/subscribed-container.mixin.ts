@@ -2,8 +2,8 @@ import { OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Constructor } from './constructor';
 
-// WARNING: THIS DOES NOT WORK ON ANGULAR 8 WITH AOT!
-// HOWEVER, IT DOES WORK ON ANGULAR 9!
+// WARNING: THIS DOES NOT WORK IN ANGULAR 8 WITH AOT!
+// HOWEVER, IT DOES WORK IN ANGULAR 9!
 export const subscribedContainerMixin = <T extends Constructor>(base: T = class {} as T) =>
   class extends base implements OnDestroy {
     destroyed$ = new Subject<void>();

@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 
-// WARNING: THIS DOES NOT WORK ON ANGULAR 9 WITH IVY.
+// WARNING: THIS DOES NOT WORK IN ANGULAR 9 WITH IVY.
 export function ondestroy(): MethodDecorator {
   /**
    * This cannot be a symbol becase we need to access it
