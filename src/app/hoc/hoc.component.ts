@@ -18,7 +18,7 @@ export class HocComponent implements OnInit {
       .subscribe();
   }
 
-  // // If you need to do something on destroy in the component class.
+  // // Any extra actions:
   // ngOnDestroy(): void {
   //   console.log('this.subscription$$.closed in ngOnDestroy::', this.subscription$$.closed);
   // }

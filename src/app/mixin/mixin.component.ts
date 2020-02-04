@@ -18,7 +18,7 @@ export class MixinComponent extends subscribedContainerMixin() implements OnInit
       .subscribe();
   }
 
-  // // If you need to do something on destroy in the component class.
+  // // Any extra actions:
   // // tslint:disable-next-line: use-lifecycle-interface
   // ngOnDestroy(): void {
   //   // tslint:disable-next-line: no-unused-expression no-string-literal
