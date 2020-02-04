@@ -1,27 +1,93 @@
-# AutoUnsubscribeNg9
+# How to unsubscribe in Angular 9
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.24.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.0-rc.12.
+## Up and running
 
-## Development server
+```bash
+npm i
+npm start
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+> **NOTE**: this project is served on AOT by default.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Freezer, the destroyer of components
 
-## Build
+Once you load the app in your browser you should see something like this:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+<img src="src/assets/auto-unsubscribe-ng9-01.png">
 
-## Running unit tests
+There is a service implemented that checks whether DevTools is open or not. You need it open in order to test the destruction and consequent unsubscription of components that were previously subscribed to observables.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Click on OK and open DevTools console. Now you should see the emission of a counter every second:
 
-## Running end-to-end tests
+<img src="src/assets/auto-unsubscribe-ng9-02.png">
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+If you click on PUSH TO DESTROY Freezer will take care of destroying the current component by navigating to a `DestroyedComponent`.
 
-## Further help
+<img src="src/assets/auto-unsubscribe-ng9-03.png">
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+As you can see the count stops. That means that our observable was unsubscribed. Also `this.subscription$$.closed` outputs `true`. That means that we included an extra action to check on the `subscription$$` inside the `ngOnDestroy()` method.
+
+```ts
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { interval, Observable, Subject, Subscription } from 'rxjs';
+import { takeUntil, tap } from 'rxjs/operators';
+
+@Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  templateUrl: './boilerplate.component.html',
+})
+export class BoilerplateComponent implements OnInit, OnDestroy {
+  destroyed$ = new Subject<void>();
+  observable$: Observable<number> = interval(1000);
+  subscription$$: Subscription;
+
+  ngOnInit(): void {
+    this.subscription$$ = this.observable$
+      .pipe(tap(console.log), takeUntil(this.destroyed$))
+      .subscribe();
+  }
+
+  ngOnDestroy(): void {
+    this.destroyed$.next();
+    // Any extra actions:
+    console.log('this.subscription$$.closed in ngOnDestroy:::', this.subscription$$.closed);
+  }
+}
+```
+
+## How to remove the boilerplate
+
+Our goal is removing these 3 things from any component class of our project:
+
+* `destroyed$ = new Subject<void>();`
+* `this.destroyed$.next();`
+* `ngOnDestroy(): void {}`
+
+In order to do that we can follow 4 different strategies in Angular.
+
+* Abstract class
+* Mixin class
+* Method decorator
+* Unsubscriber higher-order component.
+
+You can find a detailed description on how to implement those in these 2 articles:
+
+* [https://medium.com/@gesteira2046/goodbye-to-unsubscribe-in-angular-components-8817e1b21db2](https://medium.com/@gesteira2046/goodbye-to-unsubscribe-in-angular-components-8817e1b21db2)
+* [https://medium.com/@gesteira2046/how-to-auto-unsubscribe-in-angular-9-da7647cc8b54](https://medium.com/@gesteira2046/how-to-auto-unsubscribe-in-angular-9-da7647cc8b54)
+
+But they are already implemented for you in the current project.
+
+## How to test
+
+You can click on the different navigation links located at the sidenav. On each one of them Freezer will destroy the corresponding component when clicking on PUSH TO DESTROY.
+
+If you see the counter stopped it means that the observable was properly unsubscribed on destroy.
+
+If you see the `this.subscription$$.closed` log it means that the strategy was not capable of removing the `ngOnDestroy(): void {}` boilerplate.
+
+But see what happens when trying to use the DECORATOR strategy. The observable does not get unsubscribed! So it does not work in Angular 9. However, it does work in Angular 8 but since that is an older version of the framework this approach does not seem to be the most reliable one.
+
+Happy coding!
