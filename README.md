@@ -9,8 +9,6 @@ npm start
 
 Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-> **NOTE**: this project is served on AOT by default.
-
 ## Freezer, the destroyer of components
 
 Once you load the app in your browser you should see something like this:
