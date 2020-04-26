@@ -1,4 +1,4 @@
-import { Type, ɵComponentDef } from '@angular/core';
+import { ɵComponentDef, ɵComponentType } from '@angular/core';
 
 // We need this interface override the readonly keyword
 // on the properties that we want to re-assign.
@@ -7,8 +7,9 @@ export interface ComponentDef<T> extends ɵComponentDef<T> {
   onDestroy: (() => void) | null;
 }
 
-// tslint:disable-next-line interface-over-type-literal
 export type FactoryFn<T> = {
-  <U extends T>(t: Type<U>): U;
+  <U extends T>(t: ComponentType<U>): U;
   (t?: undefined): T;
 };
+
+export type ComponentType<T> = ɵComponentType<T>;
